@@ -26,6 +26,20 @@ variable "type" {
   default = "A"
 }
 
+# variable "components" {
+#   default = ["frontend", "catalogue", "mongo"]
+# }
+
 variable "components" {
-  default = ["frontend", "catalogue", "mongo"]
+  default = {
+    frontend = {
+      instance_type = "t2.micro"
+    }
+    mongo = {
+      instance_type = "t2.micro"
+    }
+    catalogue = {
+      instance_type = "t2.micro"
+    }
+  }
 }
