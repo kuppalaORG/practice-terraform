@@ -33,7 +33,9 @@ resource "aws_route53_record" "mongo" {
   name = "mongo.dev.codedeploywithbharath.tech"
   type = "A"
   ttl = "15"
-  records = [aws_instance.mongo-dev.private_ip]}
+  records = [aws_instance.mongo-dev.private_ip]
+}
+
 
 resource "aws_instance" "catalogue" {
   ami  = "ami-09c813fb71547fc4f"
