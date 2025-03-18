@@ -2,7 +2,7 @@
 resource "aws_instance" "frontend-dev" {
   ami  = data.aws_ami.ami.image_id
   instance_type = var.instance_type
-  vpc_security_group_ids = data.aws_security_groups.sg
+  vpc_security_group_ids = data.aws_security_groups.sg.ids
   tags = {
     Name = "frontend-dev" # Tag the instance with a Name tag for easier identification
   }
@@ -21,7 +21,7 @@ resource "aws_route53_record" "frontend" {
 resource "aws_instance" "mongo-dev" {
   ami  = data.aws_ami.ami.image_id
   instance_type = var.instance_type
-  vpc_security_group_ids = data.aws_security_groups.sg
+  vpc_security_group_ids = data.aws_security_groups.sg.ids
   tags = {
     Name = "mongo" # Tag the instance with a Name tag for easier identification
   }
@@ -40,7 +40,7 @@ resource "aws_route53_record" "mongo" {
 resource "aws_instance" "catalogue" {
   ami  = data.aws_ami.ami.image_id
   instance_type = var.instance_type
-  vpc_security_group_ids = data.aws_security_groups.sg
+  vpc_security_group_ids = data.aws_security_groups.sg.ids
   tags = {
     Name = "catalogue" # Tag the instance with a Name tag for easier identification
   }
