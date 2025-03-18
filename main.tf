@@ -4,7 +4,7 @@ resource "aws_instance" "frontend" {
   instance_type = "t2.micro"
   vpc_security_group_ids = ["sg-0d20a12665e2ec64c"]
   tags = {
-    Name = "frontend" # Tag the instance with a Name tag for easier identification
+    Name = "frontend-dev" # Tag the instance with a Name tag for easier identification
   }
 
 }
@@ -13,7 +13,7 @@ resource "aws_instance" "mongo" {
   instance_type = "t2.micro"
   vpc_security_group_ids = ["sg-0d20a12665e2ec64c"]
   tags = {
-    Name = "frontend" # Tag the instance with a Name tag for easier identification
+    Name = "mongo" # Tag the instance with a Name tag for easier identification
   }
 
 }
@@ -23,7 +23,7 @@ resource "aws_instance" "catalogue" {
   instance_type = "t2.micro"
   vpc_security_group_ids = ["sg-0d20a12665e2ec64c"]
   tags = {
-    Name = "frontend" # Tag the instance with a Name tag for easier identification
+    Name = "catalogue" # Tag the instance with a Name tag for easier identification
   }
 
 }
