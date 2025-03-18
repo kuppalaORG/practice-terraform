@@ -25,3 +25,7 @@ variable "domain_name" {
 variable "type" {
   default = "A"
 }
+
+variable "components" {
+  default = ["frontend", "catalogue", "mongo"]
+}

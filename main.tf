@@ -1,56 +1,22 @@
 
-resource "aws_instance" "frontend-dev" {
+resource "aws_instance" "instance" {
+  count = length(var.components)
   ami  = data.aws_ami.ami.image_id
   instance_type = var.instance_type
   vpc_security_group_ids = data.aws_security_groups.sg.ids
   tags = {
-    Name = "frontend-dev" # Tag the instance with a Name tag for easier identification
+    Name = "${var.components[count.index]}-dev" # Tag the instance with a Name tag for easier identification
   }
 }
 
-resource "aws_route53_record" "frontend" {
+resource "aws_route53_record" "dns-record" {
+  count = length(var.components)
   zone_id = data.aws_route53_zone.zone.zone_id
-  name = "frontend.dev.${var.domain_name}"
+  name = "${var.components[count.index]}.dev.${var.domain_name}"
   type = var.type
   ttl = var.ttl
-  records = [aws_instance.frontend-dev.private_ip]
+  records = [aws_instance.instance[count.index].private_ip]
 
 }
 
 
-resource "aws_instance" "mongo-dev" {
-  ami  = data.aws_ami.ami.image_id
-  instance_type = var.instance_type
-  vpc_security_group_ids = data.aws_security_groups.sg.ids
-  tags = {
-    Name = "mongo" # Tag the instance with a Name tag for easier identification
-  }
-
-}
-
-resource "aws_route53_record" "mongo" {
-  zone_id = data.aws_route53_zone.zone.zone_id
-  name = "mongo.dev.${var.domain_name}"
-  type = var.type
-  ttl = var.ttl
-  records = [aws_instance.mongo-dev.private_ip]
-}
-
-
-resource "aws_instance" "catalogue" {
-  ami  = data.aws_ami.ami.image_id
-  instance_type = var.instance_type
-  vpc_security_group_ids = data.aws_security_groups.sg.ids
-  tags = {
-    Name = "catalogue" # Tag the instance with a Name tag for easier identification
-  }
-
-}
-
-resource "aws_route53_record" "catalogue" {
-  zone_id = data.aws_route53_zone.zone.zone_id
-  name = "catalogue.dev.${var.domain_name}"
-  type = var.type
-  ttl = var.ttl
-  records = [aws_instance.catalogue.private_ip]
-}
