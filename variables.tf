@@ -35,7 +35,7 @@ variable "components" {
     frontend = {
       instance_type = "t2.micro"
     }
-    mongo = {
+    mongod = {
       instance_type = "t2.micro"
     }
     catalogue = {
